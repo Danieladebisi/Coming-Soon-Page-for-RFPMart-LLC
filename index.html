@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - RFPMart LLC</title>
+    
+    <!-- Link to USWDS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uswds@2.11.2/dist/css/uswds.min.css">
+    
+    <!-- Link to Font Awesome CSS for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        /* Main Section Styling */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .main-section {
+            background-color: #ffffff;
+            padding: 2rem;
+            max-width: 500px; /* Ensure this matches with form elements */
+            width: 100%;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: #1a4480;
+        }
+
+        .countdown-timer {
+            font-size: 1.5rem;
+            color: #0071bc;
+            margin-top: 1rem;
+        }
+
+        .launch-percentage {
+            font-size: 1.25rem;
+            color: #4a90e2;
+            margin-top: 15px; /* Adjusted margin for better spacing */
+        }
+
+        .social-icons {
+            margin-top: 20px; /* Adjusted margin for better spacing */
+            display: flex;
+            justify-content:center; 
+            gap :15px; 
+        }
+
+        .social-icons a {
+            color:#0071bc; 
+            font-size :20px ; 
+        }
+
+       /* Email Form Centering */
+       .email-form { 
+           display:flex ;
+           flex-direction :column ;
+           align-items:center ; 
+           justify-content:center ; 
+           max-width :100% ; 
+       }
+
+       .email-form label ,input ,button { 
+           width :100% ; 
+           text-align:center ;
+       }
+       
+       .email-form input ,button { 
+          padding :10px ; /* Adjusted padding for better spacing */
+          margin-bottom :12px ;  
+          box-sizing:border-box; /* Ensures padding doesn't affect width */
+       }
+       
+       .email-form input {
+          border: 1px solid #dcdcdc; /* Add border to match design */
+          border-radius: 4px; /* Rounded corners for better appearance */
+       }
+       
+       .email-form button {
+          background-color:#0071bc ; 
+          color:white ;
+          border:none ;
+          border-radius :4px ; /* Match button style with input */
+          cursor:pointer ;
+       }
+       
+       .email-form button:hover {
+           background-color:#005a9c ; /* Darker blue on hover */
+       }
+     
+</style>
+</head>
+
+<body>
+    <!-- Main Content -->
+    <main class="main-section">
+        <h1>Our New Website is Coming Soon!</h1>
+        <p>We’re working hard to launch a fantastic new experience. Stay tuned and get ready for something exciting!</p>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-timer" id="countdown-timer">Loading...</div>
+
+        <!-- Launch Progress in Percentage -->
+        <div class="launch-percentage" id="launch-percentage">Launch Progress: 85.71%</div>
+
+        <!-- Email Subscription Form -->
+        <form class="email-form usa-form" onsubmit="subscribe(event)">
+            <label for="email" class="usa-label">Sign up for updates:</label>
+            <input type="email" class="usa-input" id="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="usa-button usa-button--primary">Notify Me</button>
+        </form>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://facebook.com" aria-label="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </main>
+
+    <!-- Link to USWDS JavaScript and Font Awesome for Social Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/uswds@2.11.2/dist/js/uswds.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Countdown Timer Script -->
+    <script>
+        function countdown() {
+            const launchDate = new Date("Dec 31, 2024 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = launchDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown-timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeLeft < 0) {
+                document.getElementById("countdown-timer").innerHTML = "We're live!";
+                clearInterval(countdownInterval);
+                return; // Stop execution if countdown is over
+            }
+
+           // Update Launch Percentage
+           const totalDuration = launchDate - new Date("Jan 1, 2024").getTime();
+           const progress = Math.min(100, ((totalDuration - timeLeft) / totalDuration) * 100).toFixed(2);
+           document.getElementById("launch-percentage").innerHTML = `Launch Progress: ${progress}%`;
+       }
+
+       const countdownInterval = setInterval(countdown, 1000);
+
+       // Form Submission
+       function subscribe(event) {
+           event.preventDefault();
+           const email = document.getElementById("email").value;
+           alert(`Thank you, ${email}! You’ll be notified when we launch.`);
+       }
+   </script>
+
+</body>
+</html>
